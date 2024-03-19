@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Austin Sugar Levels</title>
+  <%= stylesheet_link_tag 'fire', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <style>
+    /* Your canvas styles */
+    #canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <% if @error_message %>
+    <p><%= @error_message %></p>
+  <% elsif @data %>
+    <% sgv = @data['sgv'].to_i %>
+    <% direction = @data['direction'] == 'NOT COMPUTABLE' ? 'Flat' : @data['direction'] %>
+    <p><strong>SGV:</strong> <%= sgv %></p>
+    <p><strong>Direction:</strong> <%= direction %></p>
+
+    <% if sgv >= 180 %>
+      <canvas id="canvas"></canvas>
+      <%= javascript_include_tag 'firework' %>
+      <%= javascript_include_tag 'confetti' %>
+       <%# <canvas id="canvas"></canvas> %>
+    <% end %>
+  <% else %>
+    <p>No data available.</p>
+  <% end %>
+</body>
+</html>
