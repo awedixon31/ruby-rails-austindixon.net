@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  root 'home#index'
+  root "home#index"
   resources :projects
   resources :skills
-  resources :contacts, only: [:new, :create]
+  resources :contacts, only: [ :new, :create ]
 end
